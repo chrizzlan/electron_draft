@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Basic File Upload</h2>
+<button class="demo-button" id="select-directory">View Demo</button>
+<p id="selected-file"></p>
+<script>
+    const { ipcRenderer } = require("electron");
+
+    document.getElementById("select-directory").addEventListener("click", () => {
+        ipcRenderer.send("select-directory");
+    });
+
+    ipcRenderer.on("select-directory-reply", (sender, path) => {
+        document.getElementById("selected-file").innerText = `You selected: ${path}`;;
+    });
+</script>
+
+<div id="receivedData">
+
+</div>
